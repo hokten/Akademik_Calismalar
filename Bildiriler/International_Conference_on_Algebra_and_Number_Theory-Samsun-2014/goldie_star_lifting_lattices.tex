@@ -1,0 +1,548 @@
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+\documentclass[handout]{beamer}  
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[backend=bibtex,citestyle=authoryear,maxnames=8,bibstyle=authortitle]{biblatex}
+
+%\usetheme{Copenhagen} 
+\usetheme{Frankfurt}
+\useoutertheme[subsection=false]{miniframes}
+
+\usecolortheme{whale}
+\usepackage[utf8]{inputenc}
+\setbeamercovered{transparent}
+\setbeamertemplate{theorems}[numbered]
+
+
+% There are many different themes available for Beamer. A comprehensive
+% list with examples is given here:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+% You can uncomment the themes below if you would like to use a different
+% one:
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{boxes}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{default}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+\title{Goldie${}_*$-Lifting Lattices}
+
+% A subtitle is optional and this may be deleted
+
+\author{Celil Nebiyev\inst{1} \and Hasan Hüseyin Ökten\inst{2}}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[Ondokuz] % (optional, but mostly needed)
+{
+  \inst{1}%
+  Department of Elementary Education, Education Faculty \\
+  Ondokuz Mayıs University \and
+  \inst{2}%
+  Computer Programming Program, Technical Sciences Vocational School \\
+  Amasya University}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{International Conference on Algebra and Number Theory, 2014}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\subject{Theoretical Computer Science}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+% Let's get started
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+\begin{frame}{Abstract}
+In this work, we define Goldie${}_*$-lifting lattices and show some characterizations of these lattices. 
+We prove that if $ L $ is Goldie${}_* $-lifting, then Goldie$ {}_* $-supplemented and $ \oplus $-supplemented. 
+We also prove that if $ L $ is Goldie${}_* $-supplemented and strongly $ \oplus $-supplemented, then Goldie${}_* $-lifting.\\
+
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+% Section and subsections will appear in the presentation overview
+% and table of contents.
+\section{Introduction}
+\subsection{Basic Definitions}
+
+\begin{frame}
+Throughout this paper, $ L $ denotes a complete modular lattice with smallest element 0 and 
+greatest element 1. A lattice we will mean a complete modular lattice.
+\end{frame}
+
+
+\begin{frame}
+\begin{itemize}[<+->]
+    \item
+        In a lattice $ L $ , for $ a,b \in L $ the join is denoted as $ a \vee b $ and the meet is denoted $ a \wedge b $.
+    \item
+        In a lattice $ L $, an element $ m \in L $ is called $
+        maximal $ in $ L $ if there is no element between $ m $ and
+        $ 1 $
+    \item
+        An element $ a $ of $ L $
+        called $ small $ in $ L $, if $ a \vee b \neq 1 $ holds for
+        every $ b \neq 1 $. This is denoted by $ a \ll L $. 
+    \item
+        An element $ c $ of $ L $ is called a $ supplement $ of $ b
+        $ in $ L $ 
+        if it is minimal relative to the property $ b \vee c = 1 $.
+        Equivalently, an element $ c $ is a supplement of $ b $ in $
+        L $ if and only if $ b \vee c = 1 $ and 
+        $ b \wedge c \ll c/0 $
+    \item
+        An element $ c $ of $ L $ is called a $ weak \ supplement $
+        of $ b $ in $ L $ if $ b \vee c = 1 $ and $ b \wedge c \ll L
+        $. 
+    \item
+        A lattice $ L $ is called 
+        $ supplemented $ (respectively, $ weakly \ supplemented $)
+        if each element of $ L $ has a supplement (respectively,
+        weak supplement) in $ L $
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}[<+->]
+    \item
+        For $ a \in L $, we said that $ b \in L $ $ complement $ of $ a $ if $ a \wedge b = 0 $ and $ a \vee b = 1 $.
+        It is denoted by $ a \oplus b = 1 $. $ a $ and $ b $ called direct summands of $ L $. A lattice $ L $ is called $ complemented $ if each
+        element in $ L $ has at least one complemented.
+    \item
+        An element $ a $ of $ L $ has $ ample \  supplements $ in $ L $ if for every $ t \in L $ with  $ a \vee t = 1 $, 
+        there is a supplement $ u $ of $ a $ with $ u \leq t $. 
+        $ L $ is called $ amply$ $ supplemented $ if all elements of $ L $ have ample supplements in $ L $.
+    \item
+        For $ a,b \in L $ such that $ a \leq b $, we said that $ b \ lies \ above \ a $ if $ b \ll 1/a $.
+    \item
+        In a lattice $ L $, the meet of all maximal (except from 1) elements in $ L $ is called $ radical $ of $ L $, denoted $rad(L) $. 
+    \item 
+        $ m $ is a $Rad$-$supplement $ of $ n $ in $ L $, if $  m \vee n = 1 $ and $ m \wedge n \leq Rad(m/0) $.
+        A lattice $ L $ is called $ Rad $-$supplemented $ if every element of $ L $ has a $ Rad $-$ supplement $
+    \item
+        A lattice $ L $ is called $ distributive $ if for any elements 
+        $ a,b,c $ of $ L $, $ a \wedge ( b \vee c ) = ( a \wedge b ) \vee ( a \wedge c) $ holds.
+\end{itemize}
+\end{frame}
+Let ¢
+
+
+
+%%%%%%%%%%%%% Beta Yildiz Bagintisi %%%%%%%%%%%%%%%%
+\section{$ \beta_* $ Relation on Lattices}
+\subsection*{}
+\begin{frame}
+\setbeamercovered{invisible}
+
+\begin{definition}
+ Let $ a,b $ be elements of $ L $. We define a relation $ \beta_* $ on the elements of $ L $ by 
+  $ a \beta_* b $ if and only if for each $ t \in L $ such that $ a \vee t = 1 $ then $ b \vee t = 1 $ and for each 
+  $ k \in L $ such that $ b \vee k = 1 $ then $ a \vee k = 1 $. 
+\end{definition}
+\pause
+Following theorem give us equivalent conditions of that definition.
+\pause
+
+    \begin{theorem} \label{4.1.3}
+      Let $ a,b $ be elements of $ L $. Then,
+      \begin{enumerate}[(i)]
+    
+        \item
+          $ a \beta_* b $ if and only if $ a \vee c = 1 $ and $ b \vee c = 1 $ for each $ c \in L $ 
+          such that $ a \vee b  \vee c = 1 $.  \label{4.1.3.1}
+    
+        \item
+          $ a \beta_* b $ if and only if $ a \vee b \ll 1/a $ and $ a \vee b \ll 1/b $.  \label{4.1.3.2}
+    
+      \end{enumerate}
+    \end{theorem}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+ \begin{theorem}\label{4.1.8}
+  Let $ a,b $ be elements of $ L $ such that $ a \leq b $. 
+  If $ b $ lies above $ a $ then, $ a \beta_* b $. 
+\end{theorem}
+
+\begingroup
+\setbeamercolor{block title}{bg=green!30!black,fg=white}
+\begin{proof}
+  Assume $ b $ lies above $ a $. Then, $ b \in 1/a $. Since $ a \leq b $ for any $ t \in L $ such that $ a \vee t = 1 $, $ b \vee t = 1 $. 
+  Conversely, let $ k \in L $ with $ b \vee k = 1 $. Then $ b \vee a \vee k = 1 $. Since $ b \in 1/a $ and $ a \vee k \in 1/a $, $ a \vee k = 1 $. Hence $ a \beta_* b $.
+\end{proof}
+\endgroup
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\begin{lemma}\label{4.1.9}
+  Let $ a,b,c $ be elements of $ L $.
+  If $ a \vee b = 1 $ and $ ( a \wedge b ) \vee c =1 $
+  then $ a \vee(b \wedge c)=b \vee ( a \wedge c ) = 1 $.
+\end{lemma}
+\begingroup
+\setbeamercolor{block title}{bg=green!30!black,fg=white}
+\begin{proof}
+  Assume $ a \vee b = 1 $ and $ ( a \wedge b ) \vee c = 1 $. Since $ ( a \wedge b ) \vee c = 1 $, $ a = a \wedge 1 = a \wedge \left[ ( a\wedge b ) \vee c \right]= ( a \wedge b ) \vee ( a \wedge c ) $. Then $ 1 = a\vee b $, 
+  $ ( a \wedge b ) \vee ( a \wedge c ) \vee b = b \vee ( a \wedge c )$. Similarly $ a \vee ( b \wedge c ) = 1 $.
+\end{proof}
+\endgroup
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\setbeamercovered{invisible}
+The following theorem show us the relationship between the $ \beta_* $ relation and supplements.
+\pause
+\begin{theorem}\label{4.1.10}
+  Let $ a,b \in L $. If $ a\beta_* b $ then the following conditions hold.
+  \begin{enumerate}[(i)]
+    \item
+      If there are exists supplements of $ a $ and $ b $ then these are same. \label{4.1.10.1}
+    \item
+      If there are exists weak supplements of $ a $ and $ b $ then these are same. \label{4.1.10.2}
+  \end{enumerate}
+\end{theorem}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\begin{corollary}\label{4.1.12}
+  Let $ x,y,c \in L $ such that $ x \leq y $ and $ c $ is a weak supplement of $ x $ in $ L $. Then 
+  $ x \beta_* y $ if and only if $ y \wedge c \ll L $.
+\end{corollary}
+
+\begingroup
+\setbeamercolor{block title}{bg=green!30!black,fg=white}
+\begin{proof}
+  $ ( \Rightarrow ) $: 
+  Clear from Theorem \ref{4.1.10} \ref{4.1.10.2}. \\
+  $ ( \Leftarrow ) $:  
+  Since $ x \leq y $, for any element $ t $ of $ L $ such that $ x \vee t = 1 $, $ y \vee t = 1 $. 
+  Let $ k \in L $ such that $ y \vee k = 1 $. Since $ c $ is weak supplement of $ x $ in $ L $, 
+  $ x \vee c = 1 $ and $ x \wedge c \ll L $. Therefore $ y \wedge ( x \vee c ) = 1 \wedge y $, and so 
+  $ y = x \vee ( y \wedge c ) $. Hence $ k \vee x \vee ( y \wedge c ) = 1 $. Since $ y \wedge c \ll L $, 
+  $ x \vee k = 1 $. Thus $ x \beta_* y $.
+\end{proof}
+\endgroup
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\begin{theorem}\label{4.1.19}
+  Let $x,y,a,b \in L $. If $ a,b \ll L, x \leq y \vee b $ and $ y \leq x \vee a $ then $ x \beta_* y $.
+\end{theorem}
+
+\begingroup
+\setbeamercolor{block title}{bg=green!30!black,fg=white}
+\begin{proof}
+  Let $ k \in L $ such that $ x \vee y \vee k = 1 $. Since $ x \leq y \vee b $, $ y \vee b \vee k = 1 $. 
+  From $ b \ll L $, $ y \vee k = 1 $. Similarly, $ x \vee k = 1 $. 
+  Hence, by Theorem \ref{4.1.3} (\ref{4.1.3.1}), $ x \beta_* y $.
+\end{proof}
+\endgroup
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\begin{theorem}\label{4.1.20}
+  Let $ x_1,x_2,y_1,y_2 \in L $. If $ x_1 \beta_* y_1 $ and $ x_2 \beta_* y_2 $ then $ ( x_1 \vee x_2 ) \beta_* ( y_1 \vee y_2 ) $.
+\end{theorem}
+\begingroup
+\setbeamercolor{block title}{bg=green!30!black,fg=white}
+\begin{proof}
+  Let $ k \in L $ such that $ (x_1 \vee x_2 ) \vee (y_1 \vee y_2 ) \vee k = 1 $. Since $ x_1 \beta_* x_2 $, 
+  $ y_1 \vee x_2 \vee y_2 \vee k = 1 $ and $ x_1 \vee x_2 \vee y_2 \vee k = 1 $. Also since 
+  $ x_2 \beta_* y_2 $, $ y_1 \vee y_2 \vee k = 1 $ and $ x_1 \vee x_2 \vee k = 1 $. 
+  By Theorem \ref{4.1.3} (\ref{4.1.3.1}), $ ( x_1 \vee x_2 ) \beta_* ( y_1 \vee y_2 ) $.
+\end{proof}
+\endgroup
+\begin{corollary}\label{4.1.21}
+  Let $ x, y_1, y_2,...,y_n \in L $. If $ x \beta_* y_i $ for $ i=1,2,...,n $ then $ \displaystyle x \beta_* \bigvee_{i=1}^n y_i $.
+\end{corollary}
+\end{frame}
+
+
+\section{$ G_* $-Lifting Lattices}
+\subsection*{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\begin{definition}
+ Let $ L $ be a lattice. $ L $ is $ G_* $-$ lifting $ if, for every $ x \in L $ there is a direct summand $ d $ of $ L $ such that $ x \beta_* d $.
+\end{definition}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\setbeamercovered{invisible}
+Following theorems give us some characterizations $ G_* $-$ lifting $ lattices.
+\pause
+\begin{theorem} \label{4.2.3}
+$ L $ is $ G_* $-$ lifting $($ G_* $-$ supplemented $) if and only if for each $ x \in L $ there exist a direct summand $ d $ (supplement $ s $)
+and a small element in $ L $ such that $ x \vee h = d \vee h = x \vee d $ ($ x \vee h = s \vee h = x \vee s $).
+\end{theorem}
+\begingroup
+\setbeamercolor{block title}{bg=green!30!black,fg=white}
+\begin{proof}
+Assume that $ L $ is $ G_* $-$ lifting $. There exist a direct summand $ d $ such that $ x \beta_* d $. 
+Hence there exist $ w \in L $ such that $ d \vee w = 1 $ and $ d \wedge w \ll d/0 $. 
+By Theorem \ref{4.1.20}, $ x \beta_* (x \vee d) $ and $ d \beta_* (d \vee x) $.
+From Theorem \ref{4.1.10} (\ref{4.1.10.2}), $ w $ is a weak supplement for $ d $, $ x $ and $ d \vee x $. 
+By the Modular Law, $ x \vee h = d \vee h = x \vee d $ where $ h = (d \vee x) \wedge w \ll L $. 
+The converse follows from Theorem \ref{4.1.19}
+\end{proof}
+\endgroup
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\fontsize{10pt}{7.5}\selectfont
+\begin{corollary} \label{4.2.4}
+    Let $ L $ be a lattice,
+    \begin{enumerate}[(i)]
+        \item 
+            If for each $ x \in L $ there exist a direct summand $ s $ and a small element $ h $ in $ L $ 
+            such that $ x = s \vee h $, then $ L $ is $ G_* $-$ lifting $. The converse holds if $ L $ is also distributive.
+        \item
+            Let $ L $ be $ G_* $-$ lifting $ and $ x \in L $ such that $ Rad(L) \leq x $. Then $ x = s \vee h $, where 
+            $ s $ is a direct summand and $ h \ll L $. 
+      \end{enumerate}
+\end{corollary}
+\begingroup
+\setbeamercolor{block title}{bg=green!30!black,fg=white}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item 
+            From Theorem \ref{4.1.19} the hypothesis implies that $ L $ is $ G_* $-$ lifting $. 
+            Assume that $ L $ is $ G_* $-$ lifting $ an distributive. Let $ x \in L $. 
+            Then there are $ s,t \in L $ such that $ x \beta_* s $, $ s \vee t = 1 $ and $ s \wedge t = 0 $. 
+            Then $ x \vee t = 1 $. So $ s = s \wedge (x \vee t) = (s \wedge x) \vee (s \wedge t) = s \wedge x $. 
+            Hence $ s \leq x $. From Theorem \ref{4.1.12}, $ t $ is a weak supplement of $ x $, so $ x \wedge t \ll L $. 
+            Thus $ x = x \wedge (s \vee t) = s \vee h $, where $ h = x \wedge t $.
+        \item
+            This part follows from Theorem \ref{4.2.3}.
+    \end{enumerate}
+\end{proof}
+\endgroup
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{theorem} \label{4.2.8}
+        Let $ L $ be a lattice and $ u \in L $. Then the following conditions are equivalent. 
+        \begin{enumerate}[(i)]
+            \item
+                There exist a decomposition $ x \oplus y = 1 $ of $ L $ such that $ x \leq u, y \wedge u \ll y/0 $
+            \item
+                There exist a direct summand $ x $ of $ L $ and $ y \ll L $ such that $ x \leq u $, $ u = x \vee y $.
+            \item
+                There exist a direct summand $ x $ of $ L $ such that $ u $ lie above $ x $
+            \item
+                There exist a supplement $ k $ of $ u $ in $ L $ such that $ u \wedge k $ a direct summand of $ u/0 $. 
+        \end{enumerate}
+    \end{theorem}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \setbeamercovered{invisible}
+    We show that some properties of amply supplemented lattices in following theorems. 
+    \pause
+    \begin{lemma} \label{4.2.9}
+        Let $ L $ be a amply supplemented lattice. Then for each supplement $ v $ in $ L $, sublattice $ v/0 $ of $ L $ is also amply supplemented.
+    \end{lemma}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{theorem} \label{4.2.10}
+        Let $ L $ be a lattice. Then following conditions are equivalent.
+        \begin{enumerate}[(i)]
+            \item
+                $ L $ is amply supplemented.
+            \item
+                For every $ u \in L $, there exist $ x/0 $ supplemented sublattice of $ L $ and $ y \ll L $ such that $ u = x \vee y $.
+            \item
+                For every $ u \in L $, there exist $ x/0 $ supplemented sublattice of $ L $ such that $ u $ lies above $ x $.
+        \end{enumerate}
+    \end{theorem}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{theorem} \label{4.2.11}
+    Let $ L $ be a lattice. Then following conditions are equivalent.
+        \begin{enumerate}[(i)]
+            \item
+                $ L $ is amply supplemented and every supplement element in $ L $ is also direct summand of $ L $.
+            \item
+                Every element of $ L $ is lies above a direct summand of $ L $.
+        \end{enumerate}
+    \end{theorem}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{theorem} \label{4.2.12}
+    Let $ L $ be a lattice. Consider the following conditions:
+     \begin{enumerate}[(i)]
+            \item
+                $ L $ is $ lifting $.
+            \item
+                $ L $ is $ H $-$ supplemented $.
+            \item
+                $ L $ is $ G_* $-$ lifting $.
+            \item
+                $ L $ is $ G_* $-$ supplemented $.
+            \item
+                $ L $ is $ supplemented $.
+        \end{enumerate}
+        Then, (i) $ \Rightarrow $ (ii) $ \Leftrightarrow $ (iii) $ \Rightarrow $ (iv) $ \Rightarrow $ (v).
+    \end{theorem}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \begin{corollary} \label{4.2.13}
+    Let $ L $ be a lattice. Then following conditions are true
+        \begin{enumerate}[(i)]
+            \item
+                $ L $ is lifting if and only if $ L $ is amply supplemented and $ L $ is strongly $ \oplus $-supplemented.
+            \item
+                If $ L $ is $ G_* $-lifting, then $ G_* $-supplemented and $ \oplus $-supplemented.
+            \item
+                If $ L $ is $ G_* $-supplemented and strongly $ \oplus $-supplemented, then $ G_* $-lifting.
+        \end{enumerate}
+    \end{corollary}
+\end{frame}
+            
+     
+                
+        
+    
+    
+
+                
+        
+
+
+
+
+
+
+
+% Placing a * after \section means it will not show in the
+% outline or table of contents.
+
+
+% All of the following is optional and typically not needed. 
+
+
+\end{document}
+
+
