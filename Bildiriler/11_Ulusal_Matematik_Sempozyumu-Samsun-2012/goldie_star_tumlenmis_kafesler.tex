@@ -1,0 +1,311 @@
+\documentclass[mathserif]{beamer} 
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{mathtools}
+\usepackage[loadonly]{enumitem}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{bm}
+
+%\setbeamertemplate{enumerate items}[default]
+%\setbeamertemplate{enumerate items}[roman]
+
+
+\usetheme{Warsaw}
+\setbeamertemplate{enumerate item}{(\insertenumlabel)}
+
+
+\newtheorem*{ornek}{Örnek}
+\newtheorem*{teorem}{Teorem}
+\newtheorem*{uyari}{Uyarı}
+\newtheorem*{sonuc}{Sonuç}
+\newtheorem*{onerme}{Önerme}
+\newtheorem*{tanim}{Tanım}
+\newtheorem*{ispat}{İspat}
+\newtheorem*{cozum}{Çözüm}
+\title{$ G_* $-tümlenmiş Kafesler}
+\author[Celil NEBİYEV and Hasan Hüseyin ÖKTEN]{Celil NEBİYEV\inst{1}
+\and Hasan Hüseyin ÖKTEN\inst{2}}
+\institute{\inst{1}Ondokuz Mayıs Üniversitesi\\
+  Eğitim Fakültesi\\
+  İlköğretim Bölümü, Samsun, TÜRKİYE\\
+  \url{} \\
+  \inst{2}Amasya Üniversitesi\\
+  Teknik Bilimler Meslek Yüksekokulu\\
+Amasya, TÜRKİYE}
+\date{19 Eylül 2012}
+\setbeamertemplate{bibliography item}[text]
+\begin{document}
+% items enclosed in square brackets are optional; explanation below
+%--- the titlepage frame -------------------------%
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Giriş}
+  \begin{tanim}
+    $ P $ boş olmayan bir kısmen sıralı küme olsun. 
+    \begin{enumerate}
+      \itemsep 0em
+      \item Her $ x, y \in P $ için $ x \vee y $ ve $ x \wedge y $ varsa $ P $'ye bir \textit{kafes},
+      \item Her $ S \subseteq P $ için $ \bigvee S $ ve $ \bigwedge S $ varsa $ P $'ye bir \textit{tam kafes}
+    \end{enumerate}
+    denir.
+  \end{tanim}
+
+
+  \begin{tanim}
+    $ L $ bir kafes olsun. Her $ a,b,c \in L $ için $$ ( a \vee b ) \wedge c = ( a \wedge c ) \vee ( b \wedge c ) $$
+    eşitliği sağlanıyorsa $ L $'ye \textit{dağılımlı kafes} denir.
+  \end{tanim}
+\begin{tanim}
+     Bir $ L $ kafesinin $ \{ x \in L\; | \; a \leq x \leq b \} $ alt kafesi, \textit{bölüm alt kafesi} olarak adlandırılır ve 
+     $ b/a $ şeklinde gösterilir.
+\end{tanim}
+\end{frame}
+
+
+
+\begin{frame}{Giriş}
+\begin{tanim}
+     $ L $ bir kafes olsun. Her $ a \in L $ için $ a \vee 1 = 1 $ olacak şekilde $ 1 \in L $ varsa 
+     bu elemana $ L $'nin \textit{biri} denir. Benzer olarak her $ a \in L $ için $ a \wedge 0 = 0 $ olacak şekilde 
+     $ 0 \in L $ varsa bu elemana $ L $'nin \textit{sıfırı} denir. Her tam kafeste $ 0 $ ve $ 1 $ elemanları vardır.
+\end{tanim}
+\begin{tanim}
+     $ L $ bir kafes olsun. Her $ a,b,c \in L $ için, \textit{modüler kural} adı verilen
+     \[
+     a \geq c \Rightarrow a \wedge ( b \vee c ) = ( a \wedge b ) \vee c 
+     \]
+     koşulu sağlanıyorsa $ L $'ye \textit{modüler kafes} denir. \\
+\end{tanim}
+     Bu çalışmada kafes olarak tam ve modüler kafesleri kastedeceğiz.
+
+\end{frame}
+
+
+
+\begin{frame}{Giriş}
+
+\begin{tanim}
+     Bir $ L $ kafesinin $ 1 $'den farklı her $ b $ elemanı için $ a \vee b $'de $ 1 $'den
+     farklı oluyorsa (diğer bir ifadeyle her $ b \in L $ için $ a \vee b = 1 $ eşitliğinden $ b = 1 $ elde ediliyorsa), 
+     $ a $'ya $ L $'nin \textit{küçük elemanı} denir ve $ a \ll L $ ile gösterilir.
+\end{tanim}
+\begin{tanim}
+     $ L $ kafesinin bir $ a $ elemanı için $ a \vee b = 1 $ ve $ a \wedge b = 0 $ oluyorsa
+     $ a $ elemanına $ b $'nin bir \textit{bütünleyeni} denir. Bu durum $ a \oplus b = 1 $ şeklinde de gösterilir ve bu gösterime 
+	\textit{direkt toplam} denir. $ L $'deki her elemanın bir bütünleyeni var 
+     ise $ L $'ye \textit{bütünlenmiş kafes} denir.
+\end{tanim}
+\end{frame}
+
+
+
+
+\begin{frame}{Giriş}
+\begin{tanim}
+     $L$ kafesinin $ 1 $'den farklı bütün maksimal elemanlarının en büyük alt sınırı $L$'nin radikali olarak tanımlanır ve $Rad(L)$ ile gösterilir. 
+     Eğer $ 1/Rad(L) $ bütünlenmiş ise $L$'ye \emph{yarı lokal} kafestir, denir.
+\end{tanim}
+
+
+\begin{teorem}
+ $ L $ bir kafes ve $ a \in L $ olsun. $ a \ll L $ ise $ a \leq Rad(L) $ olur.
+\end{teorem}
+\end{frame}
+
+
+
+
+\begin{frame}{Giriş}
+\begin{tanim}
+     Bir $ L $ kafesinin herhangi bir $ a $ elemanı için $ a \vee b = 1 $ ve $ a $ bu koşula göre 
+minimal oluyorsa $a$'ya $ b \in L$'nin $ L $ içinde bir \textit{tümleyeni} denir. Eğer $ L $'nin her elemanının $ L $'de 
+bir tümleyeni varsa $ L $'ye \textit{tümlenmiş kafes} denir.
+\end{tanim}
+
+
+\begin{teorem}
+  $ L $ bir kafes ve $ a,b  \in L $ olmak üzere, $ a $'nın $ L $ içinde $ b $'nin bir tümleyeni olması için gerek ve yeter koşul 
+$ a \vee b =1 $ ve $ a \wedge b \ll a / 0 $ olmasıdır. 
+\end{teorem}
+\end{frame}
+
+\begin{frame}{Giriş}
+\begin{tanim}
+  $ L $ bir kafes ve $ a,b \in L $ olsun . Eğer $a \vee b =1 $ ve $ a \wedge b \ll L $ ise $ a $'ya, $ b $'nin $ L $ içinde bir
+      \textit{zayıf tümleyeni} denir. $L$'nin her elemanı, $L$ içinde bir zayıf tümleyene sahipse $L$'ye \textit{zayıf tümlenmiştir} denir.
+\end{tanim}
+
+\begin{tanim} 
+$ L $ bir kafes olsun. $ a,b \in L $ olmak üzere, $ L $ üzerinde $ \beta_* $ bağıntısı;
+\\ $ a \beta_* b $
+$ \Leftrightarrow a \vee t = 1 $ eşitliğini sağlayan her $ t \in L $ için $ b \vee t = 1 $ ve 
+$ b \vee k = 1 $ eşitliğini sağlayan her $ k \in L $ için $ a \vee k = 1 $ olması şeklinde tanımlanır.
+\end{tanim}
+\end{frame}
+
+\begin{frame}{Giriş}
+\begin{teorem} 
+    $ L $ bir kafes ve $ a,b \in L $ olsun.
+    \begin{enumerate}
+        \item $ a \ll L $ ve $ a \beta_* b $ ise $ b \ll L $ dir.
+        \item $ L $ içinde küçük olan bütün elemanlar $ \beta_* $ bağıntısına göre birbirlerine denktir.
+    \end{enumerate}
+\end{teorem}
+
+\begin{tanim}
+    $ L $ bir kafes, $ a, b \in L $ ve $ a \leq b $ olsun. Bu durumda $ b \vee t = 1 $ eşitliğini sağlayan her $ t \in L $ için 
+    $ a \vee t = 1 $ ise, \textit{$ b $ elemanı $ a $'nın üzerindedir} denir.
+\end{tanim}
+
+\begin{teorem}
+    $ L $ bir kafes olsun. $ a,b \in L $ ve $ a \leq b $ olmak üzere $ b $ elemanı $ a $'nın üzerinde ise $ a \beta_* b $ dir.
+\end{teorem}
+\end{frame}
+
+
+\begin{frame}{Giriş}
+\begin{teorem}
+    $ L $ bir kafes ve $ a,b \in L $ olsun. $ a \beta_* b $ ise aşağıdaki özellikler sağlanır.
+    \begin{enumerate}
+      \item $ a $ ve $ b $ elemanlarının varsa tümleyenleri aynıdır.
+      \item $ a $ ve $ b $ elemanlarının varsa zayıf tümleyenleri aynıdır.
+    \end{enumerate}
+\end{teorem}
+\begin{teorem}
+  $ L $ bir kafes ve $ x_1, x_2,y_1,y_2 \in L $ olsun. $ x_1 \beta_* x_2 $ ve $ y_1 \beta_* y_2 $ ise 
+  $ ( x_1 \vee x_2 ) \beta_* ( y_1 \vee y_2 ) $ dir.
+\end{teorem}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{$ G_* $-tümlenmiş Kafesler}
+  \begin{tanim}
+    $ L $ bir kafes olsun. $ a $, $ L $'nin keyfi bir elemanı olmak üzere,
+    $ a \vee h = 1 $ koşulunu sağlayan her $ h \in L $ için $ a^{'} \vee h = 1 $ ve $ a^{'} \vee k = 1 $ 
+    eşitliğini sağlayan her $ k \in L $ için $ a \vee k = 1 $ olacak şekilde $ a^{'} \in L $ direkt toplam terimi varsa 
+    $ L $ kafesine  \boldmath $ H \textbf{-tümlenmiş} $ \unboldmath denir.
+
+
+  \end{tanim}
+  \begin{tanim}
+    $ L $ bir kafes olsun. Eğer $ L $ kafesinin her elemanı, $ L $ kafesinin bir direkt toplam terimi üzerinde ise
+    $ L $ kafesine yükseltilebilir denir.
+
+  \end{tanim}
+\end{frame}
+
+\begin{frame}{$ G_* $-tümlenmiş Kafesler}
+
+  \begin{tanim}
+    $ L $ bir kafes olsun. Her $ a \in L $ için $ a \beta_* d $ olacak şekilde
+    $ L $ modülünün bir $ d $ direkt toplam terimi bulunabiliyorsa $ L $ kafesine \boldmath $ G_* $ \unboldmath -yükseltilebilir denir.
+
+  \end{tanim}
+
+
+
+  \begin{tanim}
+    $ L $ bir kafes olsun. Her $ a \in L $ için $ a \beta_* s $ olacak şekilde bir $ s \in L $ 
+    bulunabiliyorsa $ L $ kafesine \textbf{$ G_* $ tümlenmiş} denir.
+
+  \end{tanim}
+
+\end{frame}
+\begin{frame}{$ G_* $-tümlenmiş Kafesler}
+  \begin{teorem}
+    $ L $ bir kafes olsun. $ L $ kafesinin $ G_* $-tümlenmiş ($ G_* $-yükseltilebilir) olması için gerek ve yeter koşul 
+    her $ x \in L $ için $ x \vee h = s \vee h = x \vee s $ ($ x \vee h = d \vee h = x \vee d $) eşitliklerini sağlayan $ L $ kafesinin 
+    en az bir küçük $ h $ elemanı ve $ s $ tümleyen elemanının ($ d $ direkt toplam teriminin) bulunabilmesidir.
+  \end{teorem}
+\end{frame}
+
+\begin{frame}{$ G_* $-tümlenmiş Kafesler}
+  \begin{sonuc}
+    \begin{enumerate}
+      \item 
+        $ L $ bir kafes olsun. Her $ x \in L $ için $ x = s \vee h $ olacak şekilde bir $ s \in L $ 
+        tümleyen elemanı ve $ L $ de küçük bir $ h $ elemanı varsa $ L $ kafesi $ G_* $-tümlenmiştir. \\
+        $ L $ nin dağılımlı olması durumunda tersi de sağlanır.
+      \item
+        $ L $, $ G_* $-tümlenmiş bir kafes ve $ RadL \leq x $ olmak üzere $ x \in L $ olsun. 
+        Bu takdirde $ x = s \vee h $ olacak şekilde bir $ s \in L $ tümleyen elemanı ve $ h \ll L $ vardır.
+
+    \end{enumerate}
+  \end{sonuc}
+
+
+\end{frame}
+
+
+\begin{frame}{$ G_* $-tümlenmiş Kafesler}
+  \begin{sonuc}
+    $ L $ bir kafes ve $ Rad(L) \ll L $ olsun. Bu takdirde $ L $ kafesinin $ G_* $-tümlenmiş olması için gerek ve yeter koşul her 
+    $ x \in L $ için $ s \vee Rad(L) = x \vee Rad(L) $ olacak şekilde $ L $ kafesinin bir $ s $ tümleyen elemanının bulunmasıdır.
+  \end{sonuc}
+
+\end{frame}
+
+
+\begin{frame}{$ G_* $-tümlenmiş Kafesler}
+  \begin{teorem}
+    $ L $ bir $ G_* $-tümlenmiş kafes ve $ x \in L $ olsun. Eğer $ L $ nin her $ s $ tümleyen elemanı için $ x \vee s $, $ 1/x $
+    bölüm alt kafesinin bir tümleyen elemanı ise $ 1/x $ bölüm alt kafesi $ G_* $-tümlenmiştir.
+
+  \end{teorem}
+  \begin{sonuc}
+    $ L $ dağılımlı bir kafes olsun. Eğer $ L $ kafesi $ G_* $-tümlenmiş ise her $ x \in L $ için $ 1/x  $ bölüm alt kafesi de $ G_* $-tümlenmiştir.
+  \end{sonuc}
+
+\end{frame}
+
+\begin{frame}{$ G_* $-tümlenmiş Kafesler}
+  \begin{teorem}
+    $ L $ bir kafes olsun. Aşağıdaki koşulları ele alalım.
+    \begin{enumerate}
+      \item $ L $ yükseltilebilirdir. \label{item:1}
+      \item $ L $ $ H $-tümlenmiştir. \label{item:2}
+
+      \item $ L $ $ G_* $-yükseltilebilirdir. \label{item:3}
+
+      \item $ L $ $ G_* $-tümlenmiştir. \label{item:4}
+
+      \item $ L $ tümlenmiştir. \label{item:5}
+
+    \end{enumerate}
+    Bu takdirde  (\ref{item:1}) $ \Rightarrow $ (\ref{item:2}) $ \Leftrightarrow $ (\ref{item:3}) $ \Rightarrow $ (\ref{item:4}) $ \Rightarrow $ (\ref{item:5}) 
+    geçişleri sağlanır.
+
+  \end{teorem}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+        \frametitle{Kaynaklar}
+\nocite{*}
+        \bibliographystyle{plain}
+        \bibliography{referanslar}
+\end{frame}
+
+
+
+\end{document}
+
