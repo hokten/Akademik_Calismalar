@@ -1,0 +1,1013 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[top=3cm,bottom=2cm,left=2cm,right=3cm]{geometry}
+%\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{mathptmx}
+\usepackage{titlesec}
+\usepackage{enumitem}
+%============================ Bas ============================
+\usepackage[citestyle=authoryear,maxnames=2,bibstyle=authortitle]{biblatex}
+
+%\DeclareNameAlias{default}{first-last/first-last}
+
+
+\DeclareNameFormat{sortname}{%
+\ifnumequal{\value{listcount}}{1}
+{\iffirstinits
+{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}}
+{\usebibmacro{name:first-last}{#1}{#3}{#5}{#7}}%
+\ifblank{#3#5}
+{}
+{\usebibmacro{name:revsdelim}}}
+{\iffirstinits
+{\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}}
+{\usebibmacro{name:first-last}{#1}{#3}{#5}{#7}}}%
+\usebibmacro{name:andothers}}
+
+\DeclareFieldFormat{postnote}{#1}
+%\DeclareNameAlias{sortname}{first-last}
+\DefineBibliographyStrings{english}{
+     andothers = {ve ark.},
+     and       = {},
+     pages  = {s\adddot}
+}
+
+
+\renewcommand*{\multinamedelim}{\addcomma\space}
+\renewcommand*{\newunitpunct}{\addcomma\space}
+\renewcommand*{\newblockpunct}{\addcomma\space}
+\renewcommand*{\multilistdelim}{\addcomma\space}
+\renewcommand*{\finallistdelim}{\addcomma\space}
+\renewcommand*{\nameyeardelim}{\addcomma\space}
+%\renewcommand*{\finalnamedelim}{%
+%  \ifnumgreater{\value{liststop}}{3}{\finalandcomma}{}%
+%    \addspace\bibstring{andothers}\space}
+
+\usepackage{filecontents}
+\begin{filecontents*}{kafeslerde_beta_star_bagintisi.bib}
+     @article{refail,
+     author = {Alizade, R. And Toksoy, E.},
+     title  = {Cofinitely Weak Supplemented Lattices, Indian Journal of Pure},
+     volume = {40:5},
+     edition = {Second},
+     year   = 2009,
+     location = {Cambridge},
+     pages = {337-346}
+     }
+     
+     @book{calugeranu,
+     author = {C\v{a}lug\v{a}reanu, G.},
+     title  = {Lattice Concepts of Module Theory},
+     pagetotal = {225},
+     year	= 2000,
+     location = {London},
+     publisher = {Kluwer Academic Publisher}
+     }
+     
+     @article{nebiyev,
+     author = {Birkenmeier, G. F. and Mutlu, F. T. and Nebiyev, C. and Sökmez, N. and Tercan, A.},
+     title   = {Goldie Supplemented Modules},
+     journal = {Glasgow Mathematical Journal},
+     year = 2010,
+     volume  = {52A},
+     pages   = {41--52}
+     }
+
+     @phdthesis{toksoy,
+     author  = {Toksoy, S. E.},
+     title   = {Kafeslerde Tümleyenler},
+     year    = "2008",
+     type = {Doktora Tezi},
+     institution = {Ege Üniversitesi-Fen Bilimleri Enstitüsü},
+     }
+\end{filecontents*}
+
+\renewcommand*{\newunitpunct}{\addcomma\space}
+
+% Comma before and after journal volume
+\renewbibmacro*{volume+number+eid}{%
+  \setunit*{\addcomma\space}% NEW
+  \printfield{volume}%
+%  \setunit*{\adddot}% DELETED
+  \setunit*{\addcomma\space}% NEW
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+
+% Prefixes for journal volume and number
+\DeclareFieldFormat[article]{volume}{\bibstring{volume}~#1}% volume of a journal
+\DeclareFieldFormat[article]{number}{:#1}% number of a journal
+
+% Comma before date; date not in parentheses
+\renewbibmacro*{issue+date}{%
+  \setunit*{\addcomma\space}% NEW
+%  \printtext[parens]{% DELETED
+    \iffieldundef{issue}
+      {\usebibmacro{date}}
+      {\printfield{issue}%
+       \setunit*{\addspace}%
+%       \usebibmacro{date}}}% DELETED
+       \usebibmacro{date}}% NEW
+  \newunit}
+
+% Issue/date macros removed after journal number
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{journal}%
+  \setunit*{\addspace}%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \setunit{\addspace}}%
+  \usebibmacro{volume+number+eid}%
+%  \setunit{\addspace}% DELETED
+%  \usebibmacro{issue+date}% DELETED
+%  \setunit{\addcolon\space}% DELETED
+%  \usebibmacro{issue}% DELETED
+  \newunit}
+
+% "In:" removed for articles; issue/date macros added after note+pages macro
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{bytranslator+others}%
+  \newunit\newblock
+  \printfield{version}%
+  \newunit\newblock
+%  \usebibmacro{in:}% DELETED
+  \usebibmacro{journal+issuetitle}%
+  \newunit
+  \usebibmacro{byeditor+others}%
+  \newunit
+  \usebibmacro{note+pages}%
+  \setunit{\addspace}% NEW
+  \usebibmacro{issue+date}% NEW
+  \setunit{\addcolon\space}% NEW
+  \usebibmacro{issue}% NEW
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{issn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \usebibmacro{finentry}}
+
+  %===================== son =====================
+
+
+
+
+
+
+\numberwithin{equation}{section}
+%\usepackage[lflt]{floatflt}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+%\hoffset	= 0.96cm
+%\textheight	=614pt
+%\footskip	=-40mm
+%\marginparwidth = 0mm
+%\evensidemargin	=0mm
+%\marginparsep	= 0mm
+%\topmargin	=30mm	
+%\oddsidemargin	=-10.mm		
+%\evensidemargin	=0mm		
+%\headheight	=0.mm
+%\headsep	=0.mm
+%\textheight	=220.mm
+%\textwidth	=150.mm
+\title{Ders Notları}
+\date{}
+\def\chaptername{Bölüm}
+\newtheoremstyle{italik}{}{}{\normalfont}{}{\bfseries}{.\ }{ }{} % basic definitions, use roman font: 
+\theoremstyle{italik}
+
+\newcommand{\Keywords}[1]{\par\noindent {\small{\textbf{Anahtar Kelimeler}\/}: #1}}
+\newcommand{\Sinif}[1]{\par\noindent {\small{\textbf{2010 AMS Konu Sınıflandırılması}\/}: #1}}
+
+\newtheorem{ornek}{Örnek}[part]
+\newtheorem{teorem}{Teorem}[section]
+\newtheorem{lemma}[teorem]{Yardımcı Teorem}
+\newtheorem{uyari}[teorem]{Uyarı}
+\newtheorem{sonuc}[teorem]{Sonuç}
+\newtheorem{onerme}[teorem]{Önerme}
+\newtheorem{tanim}[teorem]{Tanım}
+\newtheorem*{ispat}{İspat}
+\newtheorem*{cozum}{Çözüm}
+
+\newtheorem{orneks}{Örnek}[part]
+\newtheorem{teorems}{Teorem}[section]
+\newtheorem{onermes}[teorems]{Önerme}
+\newtheorem{lemmas}[teorems]{Yardımcı Teorem}
+\newtheorem{sonucs}[teorems]{Sonuç}
+\newtheorem{tanims}{Tanım}[section]
+
+
+\renewcommand{\abstractname}{ÖZET}
+\def\contentsname{İÇİNDEKİLER}
+
+
+\titleformat{\section}{\vspace{.8ex} \large\bfseries} {\thesection.}{.5em}{}
+\bibliography{demo}
+
+\begin{document}
+
+\title{KAFESLERDE $ \beta_* $ BAĞINTISI}
+\author{\begin{tabular}[t]{c}
+           \large Hasan Hüseyin ÖKTEN, Celil NEBİYEV, Nurhan SÖKMEZ\\ [7mm]
+        \large Ondokuz Mayıs Üniversitesi, Fen Edebiyat Fakültesi, Matematik Bölümü, \\
+        \large 55139 Kurupelit-Samsun \\[7mm]
+       \large hokten@gmail.com, cnebiyev@omu.edu.tr, nozkan@omu.edu.tr \\
+\end{tabular}}
+\date{}
+\maketitle
+\thispagestyle{empty}
+\begin{abstract}
+Bu çalışmada bir modülün alt modülleri kümesi üzerinde tanımlanan $ \beta^* $ bağıntısı 
+kafesler teorisine genelleştirildi. $ L $ en büyük elemanı $ 1 $ en küçük elemanı $ 0 $ olan tam modüler
+bir kafes olsun. Bu kafes üzerinde $ \beta_* $ bağıntısı "$ a \beta_* b $ $ \Leftrightarrow a \vee t = 1 $ eşitliğini 
+sağlayan her $ t \in L $ için $ b \vee t = 1 $ ve $ b \vee k = 1 $ eşitliğini sağlayan her $ k \in L $ için $ a \vee k = 1 $" olması 
+şeklinde tanımlandı. Bu bağıntının bir denklik bağıntısı olduğu gösterildi ve özellikleri 
+$ \beta^* $ bağıntısının modüllerde bilinen sonuçlarına paralel olarak incelendi. \\
+\quad \\
+\quad \\
+
+\Sinif{06C05, 16D10} \\
+\Keywords{$ \beta_* $-bağıntısı, tümlenmiş kafes, zayıf tümlenmiş kafes, oyuk kafes, bol tümlenmiş kafes.
+}
+\end{abstract}
+\pagebreak
+
+
+
+%\title{Aggregation According to Classical Kinetics---From
+%    Nucleation to Coarsening}
+%\author{Hasan Hüseyin ÖKTEN, Celil NEBİYEV, Nurhan Sökmez \\
+% \multicolumn{1}{p{.9\textwidth}}{\centering\emph{G. Mill\'an Institute
+%  of Fluid Dynamics, Nanoscience and Industrial Mathematics,
+%  Universidad Carlos III de Madrid, Spain}} \\
+%hokten@gmail.com,nozkan@omu.edu.tr, cnebiyev@omu.edu.tr
+%}
+\setcounter{page}{1}
+\section{GİRİŞ}
+
+
+\begin{tanim}
+     $ P $ bir küme ve "$\leq$", $ P $ üzerinde bir bağıntı olsun. $ P $'nin her $ x, y, z$ elemanı 
+     için aşağıdaki özellikler sağlanıyorsa "$ \leq $" bağıntısına $P$ üzerinde bir 
+     \textit{kısmi sıralama bağıntısı} denir. 
+     \begin{enumerate}
+          \itemsep 0em
+          \item $ x \leq x $.
+          \item $ x \leq y $ ve $ y \leq x $ ise $ x = y $. 
+          \item $ x \leq y $ ve $ y \leq z $ ise $ x \leq z $.
+     \end{enumerate}
+\end{tanim}
+
+\begin{tanim}
+     Üzerinde bir kısmi sıralama bağıntısı olan $ P $ kümesine, 
+     \textit{kısmi sıralı küme} denir ve $ (P,\leq) $ ile gösterilir. 
+\end{tanim}
+
+
+\begin{tanim}
+     $ A $ bir kısmi sıralı küme ve $ X \subseteq A $ olsun. 
+     $ m \in X $ olmak üzere her $ x \in X $ için $ x \leq m $ ise $ m $ elemanına 
+     $ X $ alt kümesinin \textit{en büyük elemanı} denir. $ X $'in en büyük elemanı varsa tektir. 
+\end{tanim}
+
+\begin{tanim}
+     $ A $ bir kısmi sıralı küme ve $ X \subseteq A $ olsun. 
+     $ m \in X $ olmak üzere her $ x \in X $ için $ m \leq x $ ise $ m $ elemanına 
+     $ X $ alt kümesinin \textit{en küçük elemanı} denir. 
+     $ X $'in en küçük elemanı varsa tektir. 
+\end{tanim}
+\begin{tanim}
+     $ A $ kısmi sıralı bir küme, $ X \subseteq A $ ve $ m \in X $ olsun. 
+     $ X $ içinde $ m $ elemanından daha büyük (küçük) eleman yok ise, 
+     yani $ m \leq x \ \  (x \leq m) $ olan her $ x \in X $ için $ m = x $ 
+     oluyorsa, $ m $ elemanına $ X $'de bir \textit{maksimal (minimal) eleman} denir.   \\
+     \indent Sonuç olarak, bir en büyük (en küçük) eleman varsa her zaman maksimal (minimal) elemandır, 
+     ancak maksimal (minimal) elemanlar, en büyük (en küçük) eleman olmak zorunda değildir.
+\end{tanim}
+
+\begin{tanim}
+     $ P $ bir kısmi sıralı küme, $ S \subseteq P $ ve $ x \in P $ olsun. Her $ s \in S $ için 
+     $ s \leq x $ ise $ x $ elemanına $ S $'nin bir \textit{üst sınırı} denir. 
+     Benzer şekilde, her $ s \in S $ için $ x \leq s $ ise $ x $ elemanına $ S $'nin 
+     bir \textit{alt sınırı} denir. 
+\end{tanim}
+
+\begin{tanim}
+     $ A $ bir kısmi sıralı küme ve $ X \subseteq P $ olsun. 
+     $ a \in A $ elemanı $ X $ için bir üst sınır ve 
+     $ X $'in üst sınırı olan her $ b $ için $ a \leq b $ ise, 
+     $ a \in A $ elemanına $ X $'in bir \textit{en küçük üst sınırı} (veya \textit{supremumu}) denir. \\
+     \indent Benzer şekilde, $ a \in A $ elemanı $ X $ için bir alt sınır ve 
+     $ X $'in alt sınırı olan her $ b $ için $ b \leq a $ ise $ a \in A $ elemanına $ X $'in bir 
+     \textit{en büyük alt sınırı} (veya \textit{infumumu}) denir.
+\end{tanim}
+
+\begin{tanim}
+     $ X $'in üst sınırlarının en küçüğü $ sup\,X $ veya $ \bigvee X $ ile gösterilir. Benzer şekilde 
+     $ X $'in alt sınırlarının en büyüğü de $ inf\,X $ veya $ \bigwedge X $ ile gösterilir. 
+     Özel olarak $ X = \{x, y\} $ ise, 
+     $ sup\,\{x, y\} = x \vee y $ ve $ inf\,\{x, y\} = x \wedge y $ ile gösterilir.  
+\end{tanim}
+
+\begin{tanim}
+     $ P $ boş olmayan bir kısmen sıralı küme olsun. 
+     \begin{enumerate}
+          \itemsep 0em
+          \item Her $ x, y \in P $ için $ x \vee y $ ve $ x \wedge y $ varsa $ P $'ye bir \textit{kafes},
+          \item Her $ S \subseteq P $ için $ \bigvee S $ ve $ \bigwedge S $ varsa $ P $'ye bir \textit{tam kafes}
+     \end{enumerate}
+     denir.
+\end{tanim}
+
+\begin{tanim}
+    $ L $ bir kafes ve $ S \subseteq L $ olsun. $ S $ alt kümesi $ \vee $ ve $ \wedge $ işlemlerine göre kapalıysa $ S $'ye 
+    $ L $'nin bir \textit{alt kafesi} denir.
+\end{tanim}
+
+
+
+%0000000000000000000000000000000000000 Dağılımlı Kafes Tanım 000000000000000000000000000000000000000000000000000
+
+\begin{tanim}
+$ L $ bir kafes olsun. Her $ a,b,c \in L $ için $$ ( a \vee b ) \wedge c = ( a \wedge c ) \vee ( b \wedge c ) $$
+eşitliği sağlanıyorsa $ L $'ye \textit{dağılımlı kafes} denir.
+\end{tanim}
+
+
+
+\begin{lemma}
+$ L $ nin dağılımlı kafes olması için gerek ve yeter koşul her $ a,b,c \in L $ için $ ( a \wedge b ) \vee c = ( a \vee c ) \wedge ( b \vee c ) $ 
+eşitliğinin sağlanmasıdır.
+
+\end{lemma}
+
+\begin{tanim}
+     $ L $ bir kafes olsun. Her $ a \in L $ için $ a \vee 1 = 1 $ olacak şekilde $ 1 \in L $ varsa 
+     bu elemana $ L $'nin \textit{biri} denir. Benzer olarak her $ a \in L $ için $ a \wedge 0 = 0 $ olacak şekilde 
+     $ 0 \in L $ varsa bu elemana $ L $'nin \textit{sıfırı} denir. Her tam kafeste $ 0 $ ve $ 1 $ elemanları vardır.
+\end{tanim}
+\indent Bölüm sonuna kadar kafes olarak tam kafesleri kastedeceğiz.
+
+\begin{tanim}
+     Bir $ L $ kafesinin $ \{ x \in L\; | \; a \leq x \leq b \} $ alt kafesi, \textit{bölüm alt kafesi} olarak adlandırılır ve 
+     $ b/a $ şeklinde gösterilir.
+\end{tanim}
+
+\begin{tanim}
+     $ K $ ve $ L $ iki kısmi sıralı küme ve $ \varphi : K \rightarrow L $ bir dönüşüm olsun.
+     \begin{enumerate}
+          \itemsep 0em
+          \item 
+               $ K $'da $ x \leq y $ olan her $ x,y \in L $ için $ L $'de $ \varphi(x) \leq \varphi(y) $ oluyorsa 
+               $ \varphi $'ye \textit{sıralama koruyan} (veya \textit{monoton}) dönüşüm denir.
+          \item
+               Her $ x,y \in K $ için, $ K $'da $ x \leq y $ olması için gerek ve yeter koşul $ L $'de 
+               $ \varphi(x) \leq \varphi(y) $ olması ise $ \varphi $'ye \textit{sıralama gömmesi} denir.
+          \item
+            $ \varphi : K \rightarrow L $ örten sıralama gömmesi ise $ \varphi $'ye \textit{sıralama izomorfizması} denir. 
+               Eğer $ K $'dan $ L $'ye tanımlı bir sıralama izomorfizması varsa $ K $ ve $ L $'ye \textit{sıralı izomorf kümeler} denir.
+     \end{enumerate}
+\end{tanim}
+
+\begin{tanim} 
+
+     $ K $ ve $ L $ iki kafes ve $ f : K \rightarrow L $'ye bir dönüşüm olsun. Her $ a,b \in K $ için aşağıdaki özellikler sağlanıyorsa 
+     $ f $'ye \textit{kafes homomorfizması} denir.
+     \begin{enumerate}
+          \itemsep 0em
+          \item $ f(a \vee b) = f(a) \vee f(b) $
+          \item $ f(a \wedge b) = f(a) \wedge f(b) $
+     \end{enumerate}
+     \quad \  Bijektif kafes homomorfizmasına \textit{kafes izomorfizması} denir.
+\end{tanim}
+
+\begin{tanim}
+
+     $ L $ bir kafes olsun. Her $ a,b,c \in L $ için, \textit{modüler kural} adı verilen
+     \[
+     a \geq c \Rightarrow a \wedge ( b \vee c ) = ( a \wedge b ) \vee c 
+     \]
+     koşulu sağlanıyorsa $ L $'ye \textit{modüler kafes} denir. \\
+     \indent Modüler bir kafesin her alt kafesi de modülerdir.
+\end{tanim}
+
+\begin{teorem}  \autocite[Teorem 1.5]{calugeranu}
+     $ L $ bir modüler kafes $ a,b \in L $ olsun. Bu durumda $ L $'nin $ (a \vee b)/b $ ve $ a/(a \wedge b ) $ bölüm alt kafesleri 
+     izomorftur.
+\end{teorem}
+
+\begin{tanim}
+     Bir $ L $ kafesinin $ 1 $'den farklı her $ b $ elemanı için $ a \vee b $'de $ 1 $'den
+     farklı oluyorsa (diğer bir ifadeyle her $ b \in L $ için $ a \vee b = 1 $ eşitliğinden $ b = 1 $ elde ediliyorsa), 
+     $ a $'ya $ L $'nin \textit{küçük elemanı} denir ve $ a \ll L $ ile gösterilir.
+\end{tanim}
+\begin{tanim}
+    $ L $ bir kafes olsun. $ L $'nin $ 1 $'den farklı her elemanı $ L $ içinde küçükse $ L $'ye \textit{oyuk kafes} denir.
+\end{tanim}
+\begin{lemma} \autocite[Lemma 2.2]{refail}
+
+         $ L $ bir kafes, $ a,b \in L $ ve $ a < b $ olsun. Bu durumda aşağıdakiler sağlanır.
+          \begin{enumerate}[label=(\roman{*}), ref=(\roman{*})]
+
+               \itemsep 0em
+               \item $ a \ll b/0 $ ise her $ c \in L $ için $ a \vee c \ll (b \vee c)/c $ olur.
+               \item $ b \ll L $ olması için gerek ve yeter koşul $ a \ll L $ ve $ b \ll 1/a $ olmasıdır. 
+               \item $ a \ll b/0 $ ise $ a \ll L $ dir. 
+          \end{enumerate}
+     \end{lemma}
+
+\begin{tanim}
+     $ L $ kafesinin bir $ a $ elemanı için $ a \vee b = 1 $ ve $ a \wedge b = 0 $ oluyorsa
+     $ a $ elemanına $ b $'nin bir \textit{bütünleyeni} denir. Bu durum $ a \oplus b = 1 $ şeklinde de gösterilir ve bu gösterime 
+	\textit{direkt toplam} denir. $ L $'deki her elemanın bir bütünleyeni var 
+     ise $ L $'ye \textit{bütünlenmiş kafes} denir.
+\end{tanim}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{tanim}
+     $L$ kafesinin $ 1 $'den farklı bütün maksimal elemanlarının en büyük alt sınırı $L$'nin radikali olarak tanımlanır ve $Rad(L)$ ile gösterilir. 
+     Eğer $ 1/Rad(L) $ bütünlenmiş ise $L$'ye \emph{yarı lokal} kafestir, denir.
+\end{tanim}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{lemma} \label{radicin}
+ $ L $ bir kafes ve $ a \in L $ olsun. $ a \ll L $ ise $ a \leq rad(L) $ olur.
+\end{lemma}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{tanim}
+     Bir $ L $ kafesinin herhangi bir $ a $ elemanı için $ a \vee b = 1 $ ve $ a $ bu koşula göre 
+minimal oluyorsa $a$'ya $ b \in L$'nin $ L $ içinde bir \textit{tümleyeni} denir. Eğer $ L $'nin her elemanının $ L $'de 
+bir tümleyeni varsa $ L $'ye \textit{tümlenmiş kafes} denir.
+\end{tanim}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{lemma}\autocite[Yard. Teorem 3.1.1]{toksoy}
+  $ L $ bir kafes ve $ a,b  \in L $ olmak üzere, $ a $'nın $ L $ içinde $ b $'nin bir tümleyeni olması için gerek ve yeter koşul 
+$ a \vee b =1 $ ve $ a \wedge b \ll a / 0 $ olmasıdır. 
+\end{lemma}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{tanim}
+    $ L $ bir kafes ve $ a \in L $ olsun. $ a \vee t = 1 $ koşulunu sağlayan her $ t \in L $ elemanı için 
+    $ a $' nın $ t^{'} \leq t $ olan $ t^{'} $ tümleyeni varsa $ a $ elemanı $ L $'de bir bol tümleyene sahiptir denir. 
+    $ L $'nin her elemanı bol tümleyene sahipse $ L $'ye \textit{bol tümlenmiş kafes} denir.
+\end{tanim}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{tanim}
+  $ L $ bir kafes ve $ a,b \in L $ olsun . Eğer $a \vee b =1 $ ve $ a \wedge b \ll L $ ise $ a $'ya, $ b $'nin $ L $ içinde bir
+      \textit{zayıf tümleyeni} denir. $L$'nin her elemanı, $L$ içinde bir zayıf tümleyene sahipse $L$'ye \textit{zayıf tümlenmiştir} denir.
+\end{tanim}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\section{Kafeslerde $ \beta_* $ Bağıntısı}
+\indent Bu bölümde, bir modülün alt modülleri kümesi üzerinde tanımlanan $ \beta^* $ bağıntısı 
+kafesler teorisine genelleştirilmiştir. Bölüm boyunca aksi belirtilmedikçe, 
+kafes olarak tam modüler kafesleri kastedeceğiz.
+
+
+\begin{tanim} \label{1}
+$ L $ bir modüler kafes olsun. $ a,b \in L $ olmak üzere, $ L $ üzerinde $ \beta_* $ bağıntısı;
+\\ $ a \beta_* b $
+$ \Leftrightarrow a \vee t = 1 $ eşitliğini sağlayan her $ t \in L $ için $ b \vee t = 1 $ ve 
+$ b \vee k = 1 $ eşitliğini sağlayan her $ k \in L $ için $ a \vee k = 1 $ olması şeklinde tanımlanır.
+\end{tanim}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{lemma} \label{2}
+$ L $ modüler kafesi üzerinde tanımlanan $ \beta_* $ bağıntısı bir denklik bağıntısıdır.
+\end{lemma}
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+\begin{ispat}
+Yansıma ve simetri özellikleri açıktır. $ a,b,c \in L $ olmak üzere $ a \beta_*b $ ve $ b \beta_* c $ olsun. 
+$ a \vee t = 1 $ eşitliğini sağlayan bir $ t \in L $ alalım. $ a \beta_* b $ olduğundan $ b \vee t = 1 $ dir. $ b \beta_* c $ denkliği de dikkate 
+alınırsa $ c \vee t = 1 $ bulunur. Benzer şekilde $ c \vee k = 1 $ eşitliğini sağlayan her $ k \in L $ için de $ a \vee k = 1 $ olduğu 
+gösterilebilir. O halde geçişme özelliği sağlanır. $ \beta_* $ bir denklik bağıntısıdır.
+\end{ispat}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{teorem} \label{3}
+$ L $ bir kafes ve  $ a,b \in L $ olsun. Bu durumda aşağıdakiler sağlanır. 
+ \begin{enumerate}[label=(\roman{*}), ref=(\roman{*})]
+    \item
+      $ a \beta_* b  \Leftrightarrow a \vee b \vee c = 1 $ koşulunu sağlayan her $ c \in L $ için 
+      $a \vee c = 1 $ ve $ b \vee c = 1 $ dir. \label{3.1}
+    \item
+      $ a \beta_* b \Leftrightarrow a \vee b \ll 1/a $ ve $ a \vee b \ll 1/b $.\label{3.2}
+  \end{enumerate}
+\end{teorem}
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+\begin{ispat}
+  \begin{enumerate}
+    \item
+      $ ( \Rightarrow ) $
+      $ a \beta_* b$ olsun. $ a \vee b \vee c = 1 $ olacak şekilde $ c \in L $ alalım. Buradan $ a \vee ( b \vee c ) = 1 $ ve 
+      $ a \beta_* b $ olduğundan $ b \vee ( b \vee c ) = 1 $ bulunur. O halde $ b \vee c = 1 $ dir. Benzer şekilde $ a \vee c = 1 $ olduğu da
+      gösterilebilir. \\
+      $( \Leftarrow )$
+      $ a \vee t = 1 $ koşulunu sağlayan $ t \in L $ alalım. Bu takdirde $ a \vee b \vee t = 1 $ olur ve 
+      hipotezden $ b \vee t = 1 $ elde edilir. Benzer şekilde $ b \vee k = 1 $ 
+      koşulunu sağlayan her $ k \in L $ için $ a \vee k = 1 $ olduğu gösterilebilir. O halde $ a \beta_* b $ dir.
+    \item
+      $ ( \Rightarrow ) $
+      $ a \vee b \vee t = 1 $ olacak şekilde $ t \in 1/a $ alalım. Bu durumda $ ( a \vee t ) \vee b = 1 $ olur. 
+      $ a \beta_* b $ olduğundan $ a \vee t = (a \vee t) \vee a = 1 $ elde edilir. $ a \leq t $ olduğu dikkate alınırsa $ t = a \vee t = 1 $ bulunur. 
+      O halde $ a \vee b \ll 1/a $ dır. Benzer şekilde $ a \vee b \ll 1/b $ olduğu gösterilebilir. \\
+      $( \Leftarrow )$
+      $ a \vee t = 1 $ olacak şekilde $ t \in L $ alalım. Bu durumda $ ( a \vee b ) \vee ( b \vee t ) = a \vee b \vee t = 1 $ olur. 
+      $b \vee t \in 1/b $ ve $ a \vee b \ll 1/b $ olduğundan $ b \vee t = 1 $ elde ederiz. 
+      Benzer şekilde $ b \vee k = 1 $ eşitliğini sağlayan her $ k \in L $ için $ a \vee k = 1 $ olduğu gösterilebilir. 
+  \end{enumerate}
+\end{ispat}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%                                                           Teoroem 2.4
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{teorem} \label{4}
+    $ L $ bir kafes ve $ a,b \in L $ olsun.
+    \begin{enumerate}
+        \item $ a \ll L $ ve $ a \beta_* b $ ise $ b \ll L $ dir.
+        \item $ L $ içinde küçük olan bütün elemanlar $ \beta_* $ bağıntısına göre birbirlerine denktir.
+    \end{enumerate}
+\end{teorem}
+%000000000000000000000000000000000000000000000000000
+\begin{ispat}
+    \begin{enumerate}
+        \item
+            $ a,b \in L $, $ a \beta_* b $ ve $ a \ll L $ olsun. 
+            $ b \vee t = 1 $ eşitliğini sağlayan bir $ t \in L $ alalım. 
+            $ a \beta_* b $ olduğundan $ a \vee t = 1 $ dir. $ a \ll L $ olduğu dikkate alınırsa $ t = 1 $ bulunur. 
+            O halde $ b \ll L $ dir.
+        \item
+            $ a,b \in L $, $ a \ll L $ ve $ b \ll L $ olsun. $ a \ll L $ olduğundan, $ a \vee t = 1 $ eşitliğini sağlayan 
+            her $ t \in L $ için $ t = 1 $ dir. Bu durumda $ b \vee t = 1 $ bulunur. $ b \vee k = 1 $ eşitliğini sağlayan 
+            her $ k \in L $ için $ a \vee k = 1 $ olduğu da benzer şekilde gösterilebilir. O halde $ a \beta_* b $ dir. 
+    \end{enumerate}
+\end{ispat}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%                                                       Sonuç 2.5
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{sonuc} \label{5}
+    $ L $ bir kafes olsun. Bu durumda $ L $'nin oyuk olması için gerek ve yeter koşul $ L $'nin $1$'den farklı tüm 
+    elemanlarının $ \beta_* $ bağıntısına göre birbirine denk olmasıdır.
+\end{sonuc}
+%00000000000000000000000000000000000000000000000000
+\begin{ispat}
+    $ ( \Rightarrow ) $
+    $ L $ oyuk kafes olsun. Bu takdirde $ L $'nin $ 1 $'den farklı her elemanı $ L $ içinde küçüktür. 
+    Teorem \ref{4} (ii) gereği $ L $'nin $ 1 $'den farklı tüm elemanları birbirine denktir. \\
+    $ ( \Leftarrow ) $ 
+    $ L $ nin $ 1 $'den farklı tüm elemanları birbirine denk olsun. $ a \in L $ için $ a \vee t = 1 $ olacak şekilde 
+    $ t \in L $ alalım. Eğer $ t \neq 1 $ olsaydı hipotez gereği $ a \beta_* t $ olduğundan $ t = t \vee t = 1 $ çelişkisi elde edilir. 
+    O halde $ t=1 $ dir. Bu durumda $ a \ll L $ olup $ L $ oyuk kafestir.
+\end{ispat}
+
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%                                                       Tanım 2.6
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+
+\begin{tanim}
+    $ L $ bir kafes, $ a, b \in L $ ve $ a \leq b $ olsun. Bu durumda $ b \vee t = 1 $ eşitliğini sağlayan her $ t \in L $ için 
+    $ a \vee t = 1 $ ise, \textit{$ b $ elemanı $ a $'nın üzerindedir} denir.
+\end{tanim}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%                                                       Teorem 2.7
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+\begin{teorem}\label{6}
+    $ L $ bir kafes olsun. $ a,b \in L $ ve $ a \leq b $ olmak üzere $ b $ elemanı $ a $'nın üzerinde ise $ a \beta_* b $ dir.
+\end{teorem}
+
+\begin{ispat}
+    $ b $ elemanı $ a $'nın üzerinde olduğundan tanım gereği $ b \vee t = 1 $ eşitliğini sağlayan her $ t \in L $ için $ a \vee t = 1 $ dir. 
+    $ a \vee k = 1 $ eşitliğini sağlayan her $ k \in L $ için $ a \leq b $ olduğundan $ b \vee k = 1 $ dir. 
+    Sonuç olarak $ a \beta_* b $ dir.
+\end{ispat}
+
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%                                                       Yardımcı Teorem 2.9
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+
+
+
+\begin{lemma}\label{7}
+  $ L $ bir kafes ve $ a,b,c \in L $ olsun. Eğer $ a \vee b=1 $ ve $ (a \wedge b) \vee c = 1 $ ise 
+  $ a \vee ( b \wedge c ) =  b \vee (a \wedge c)=1 $ olur.
+\end{lemma}
+\begin{ispat}
+  $ a,b,c \in L $ için $ a = a \wedge 1 = a \wedge \left[(a \wedge b) \vee c \right] = 
+  (a \wedge b) \vee (a \wedge c)$ olur. Bu durumda $ b \vee (a \wedge c) = b \vee (a \wedge b) \vee (a \wedge c) = b \vee a = 1 $ 
+  bulunur. $ a \vee (b \wedge c)=1 $ olduğu da benzer şekilde görülebilir.
+\end{ispat}
+
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+%                                                           Teorem 2.10
+%00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+
+
+
+
+\begin{teorem} \label{8} \autocite[Theorem 2.6]{nebiyev}
+    $ L $ bir kafes ve $ a,b \in L $ olsun. $ a \beta_* b $ ise aşağıdaki özellikler sağlanır.
+    \begin{enumerate}[label=(\roman{*}), ref=(\roman{*})]
+      \item $ a $ ve $ b $ elemanlarının varsa tümleyenleri aynıdır. \label{8.1}
+      \item $ a $ ve $ b $ elemanlarının varsa zayıf tümleyenleri aynıdır.\label{8.2}
+    \end{enumerate}
+\end{teorem}
+
+\begin{ispat}
+  \begin{enumerate}
+    \item
+      $ c \in L $, $ a $'nın bir tümleyeni olsun. Bu takdirde $ a \vee c = 1 $ dir. $ a \beta_* b $ olduğundan $ b \vee c = 1 $ bulunur. 
+      $ b \vee d = 1 $ eşitliğini sağlayan $ d \leq c $ alalım. Bu durumda $ a \beta_* b $ olduğundan $ a \vee d = 1 $ dir. 
+      $ c $ elemanı $ a $'nın bir tümleyeni ve $ d \leq c $ olduğundan $ d=c $ dir. Dolayısıyla $ c $, $ b $'nin de bir tümleyeni olur. 
+      $ a $ ve $ b $ nin rolleri değiştirilirse $ b $'nin tümleyenleri ile $ a $'nın tümleyenlerinin aynı 
+      olduğu görülebilir.
+    \item
+      $ a \beta_* b $ ve $ c \in L $, $ a $'nın bir zayıf tümleyeni olsun. Bu durumda $ a \vee c = 1 $ ve 
+      $ a \wedge c \ll L $ dir. $ a \beta_* b $ ve $ a \vee c = 1 $ olduğundan $ b \vee c = 1 $ dir. 
+      $ t \in L $ için $ ( b \wedge c ) \vee t = 1 $ olsun. Bu durumda Yardımcı Teorem \ref{7}
+      gereği $ b \vee ( c \wedge t ) = 1 $ ve $ c \vee ( b \wedge t ) = 1 $ olur. $ a \beta_* b $ olduğu dikkate alınırsa 
+      $ a \vee (c \wedge t)=1 $ elde edilir. $ c \vee (b \wedge t)=1 $ eşitliğinin her iki 
+      tarafının $ t $ ile supremumu alınırsa $ c \vee t = 1 $ bulunur. $ a \vee (c \wedge t)=1 $ ve 
+      $ c \vee t = 1 $ olduğundan Yardımcı Teorem \ref{7} gereği $ t \vee (c \wedge a)=1 $ dir. 
+      Burada $ a \wedge c \ll L $ olduğundan $ t = 1 $ dir. 
+      O halde $ b \wedge c \ll L $ dir. Sonuç olarak $ c $, $ b $ nin de bir zayıf tümleyenidir. $ a $ ile $ b $ nin 
+      rolleri değiştirilerek $ b $'nin bir zayıf tümleyeninin $ a $'nın da zayıf tümleyeni olduğu gösterilebilir.
+  \end{enumerate}
+\end{ispat}
+
+
+\begin{teorem}\label{9}
+  $ L $ bol tümlenmiş kafes ve $ a,b \in L $ olsun. $ a $ ve $ b $'nin 
+  tümleyenleri aynı ise $ a \beta_* b $ dir.
+\end{teorem}
+\begin{ispat}
+  $ a \vee t=1 $ eşitliğini sağlayan $ t \in L $ alalım. $ L $ bol tümlenmiş olduğundan $ a \vee r = 1 $ ve 
+  $ r \leq t $ olacak şekilde $ a $'nın $ L $ içinde bir $ r $ tümleyeni vardır. Hipotezden $ r $, 
+  $ b $'nin de bir tümleyenidir. O halde $ b \vee r = 1 $ dir. $ r \leq t $ olduğundan 
+  $ b \vee t = 1 $ elde edilir. $ a $ ile $ b $ nin rolleri değiştirilirse $ b \vee k = 1 $ 
+  eşitliğini sağlayan her $ k \in L $ için de $ a \vee k = 1 $ olduğu gösterilebilir. 
+  Sonuç olarak $ a \beta_* b $ dir.
+\end{ispat}
+
+
+
+
+
+\begin{uyari}
+  $ L $ bir kafes olsun. $ L $ kafesinin, $ \beta_* $ bağıntısı ile birbirine denk olan 
+  elemanlarından biri tümleyense diğeri de tümleyen olmak zorunda değildir. Örneğin, 
+  $ L $ sıfırdan farklı en az bir küçük elemanı bulunan bir kafes olsun. Bu durumda $ L $ 
+  nin sıfırdan farklı bir $ x $ küçük elemanı için $ x \beta_* 0 $ olur. $ 0 $ elemanı $ L $'de bir 
+  tümleyen olmasına rağmen $ x $ elemanı $ L $'de bir tümleyen değildir. 
+\end{uyari}
+
+
+\begin{sonuc}\label{10}
+  $ L $ bir kafes $ x,y,c \in L $ olmak üzere $ x \leq y $ ve $ c $ elemanı $ x $'in bir zayıf tümleyeni olsun. 
+  Bu takdirde $ x \beta_* y $ olması için gerek ve yeter koşul $ y \wedge c \ll L $ olmasıdır.
+\end{sonuc}
+\begin{ispat}
+  $ ( \Rightarrow ):$ Teorem \ref{8} \ref{8.2} gereği açıktır. \\
+  $ ( \Leftarrow ):$ $ x \leq y $ olduğundan $ x \vee t = 1 $ eşitliğini sağlayan her $ t \in L $ için 
+  $ y \vee t = 1 $ dir. $ k \in L $ ve $ y \vee k = 1 $ olsun. $ c $, $x$'in bir zayıf 
+  tümleyeni olduğundan $ x \vee c=1 $ ve $ x \wedge c \ll L $ dir. Bu durumda 
+  $ y \wedge ( x \vee c ) = 1 \wedge y $ olur ve $ y = x \vee ( y \wedge c ) $ bulunur. 
+  Son eşitliğin her iki tarafının $ k $ ile supremumu alınırsa 
+  $ k \vee x \vee ( y \wedge c ) = k \vee y = 1 $ elde edilir. 
+  $ y \wedge c \ll L $ olduğundan  $ x \vee k = 1 $ bulunur. 
+  Sonuç olarak $ x \beta_* y $ dir.
+\end{ispat}
+
+%===================== Teorem 11 ====================%
+
+\begin{teorem}\label{11}
+  $ L $ bir kafes ve $ x,y,z,a,b \in L $ için $ a \oplus b = 1 $ ve $ y $, $ x $'in $ L $ içinde bir tümleyeni 
+  olsun. Bu takdirde aşağıdaki ifadeler sağlanır. 
+  \begin{enumerate}[label=(\roman{*}), ref=(\roman{*})]
+    \item $ z \beta_* y $ ise $ z / z \wedge x \cong y / y \wedge x $ dir.\label{11.1}
+    \item $ x \beta_* b $ ise $ z / z \wedge a \cong b / 0 $ dır.\label{11.2}
+    \item $ z \leq b $ olsun. Bu durumda $ z \beta_* b $ olması için gerek ve yeter koşul $ z = b $ olmasıdır.\label{11.3}
+    \item $ b \leq z $ olsun. Bu durumda $ z \beta_* b $ olması için gerek ve yeter koşul $ z \wedge a \ll L $ olmasıdır.\label{11.4}
+  \end{enumerate}
+\end{teorem}
+
+\begin{ispat}
+  \begin{enumerate}
+    \item
+      $ y $, $ x $'in bir tümleyeni ve $ z \beta_* y $ olduğundan $ x \vee y = x \vee z = 1 $ bulunur. 
+      Bu eşitlik ve $ z / z \wedge x \cong z \vee x / x $,  $ y \vee x / x \cong y / y \wedge x $ 
+      izomorfizmaları dikkate alınırsa 
+      $$ z / z \wedge x \cong z \vee x / x = y \vee x / x \cong y / y \wedge x $$ 
+      elde edilir. O halde $ z / z \wedge x \cong y / y \wedge x $ olur.
+    \item 
+      $ z \beta_* b $ olduğundan \ref{11.1} gereği $ z / z \wedge a \cong b / a \wedge b $ bulunur. 
+      $ a \oplus b = 1 $ ise $ a \vee b = 1 $ ve $ a \wedge b = 0 $ olur. Buradan 
+      $ z / z \wedge a \cong b / 0 $ elde edilir.
+    \item
+      $ ( \Rightarrow ):$ $ a \oplus b = 1 $ olduğundan $ a \vee b = 1 $ dir. $ z \beta_* b $ 
+      olduğunu dikkate alınırsa $ a \vee z = 1 $ bulunur. $ b $, $ a $'nın bir tümleyeni ve $ z \leq b $ 
+      olduğundan tümleyen tanımı gereği $ z = b $ dir. \\ 
+      $ ( \Leftarrow ):$ $ \beta_* $ bağıntısının yansıma özelliği gereği açıktır.
+    \item
+      $ ( \Rightarrow ):$ $ a $, $ b $'nin bir zayıf tümleyeni ve $ z \beta_* b $ olduğundan 
+      Teorem \ref{8} \ref{8.2} gereği $ a $, $ z $'nin de bir zayıf tümleyenidir. O halde 
+      $ z \wedge a \ll L $ dir. \\
+      $ ( \Leftarrow ):$ Sonuç \ref{10} gereği açıktır.
+  \end{enumerate}
+\end{ispat}
+
+
+%==================== Teorem 12 ===================%
+\begin{teorem}\label{12}
+  $ L $ dağılımlı bir kafes ve $ a,b \in L $ olsun. $ a \oplus b = 1 $ ve $ a \beta_* x $ ise $ a \leq x $ ve 
+  $ b \wedge x \ll L $ olur.
+\end{teorem}
+\begin{ispat}
+  $ a \oplus b = 1 $ ve $ a \beta_* x $ olduğundan $ x \vee b = 1 $ dir. Buradan $ a \wedge ( x \vee b ) = a\wedge 1 $ 
+  elde edilir. Modüler kuralı gereği $ ( a \wedge x ) \vee ( a \wedge b ) = a $ bulunur. $ a \wedge b =  0 $ olduğundan 
+  $ a \wedge x = a $ yani $ a \leq x $ elde edilir. $ a \leq x $ ve $ x \beta_* a $ olduğundan Teorem \ref{11} \ref{11.4} gereği $ b \wedge x \ll L $ olur.
+\end{ispat}
+
+
+%================== Teorem 13 ====================%
+\begin{teorem}\label{13}
+  $ L $ dağılımlı bir kafes olsun. $ x \in L $ için $ a \leq x $ ve $ b \wedge x \ll L $ olacak şekilde 
+  bir $ a \oplus b = 1 $ ayrışımı var ve $ x \beta_* y $ ise bu ayrışım $ y \in L $ için de $ a \leq y $ 
+  ve $ b \wedge y \ll L $ olacak şekilde vardır.
+\end{teorem}
+\begin{ispat}
+  $ a \leq x $ ve $ b \wedge x \ll L $ olduğundan Teorem \ref{11} \ref{11.4} gereği $ a \beta_* x $ olur. 
+  $ a \beta_* x $ ve $ x \beta_* y $ olduğundan $ a \beta_* y $ dir. Teorem \ref{12} gereği 
+  $ L $ dağılımlı kafes ve $ a \beta_* y $ olduğundan $ a \leq y $ ve $ b\wedge y \ll L $ bulunur.
+\end{ispat}
+
+
+
+
+
+%================= Teorem 14 ====================%
+\begin{teorem}\label{14}
+  $ L $ bir kafes, $ x \in L $ ve $ k $, $ L $'nin $ 1 $'den farklı bir maksimal elemanı olsun. Bu takdirde aşağıdakiler 
+  sağlanır. 
+  \begin{enumerate}[label=(\roman{*}), ref=(\roman{*})]
+    \item $ a \vee b = 1 $, $ b \neq 1 $ ve $ x \beta_* a $ koşullarını sağlayan $ a,b \in L $ için $ x \not\le b $ dir.\label{14.1}
+    \item $ x \beta_* y $ ve $ x \leq k $ ise $ y \leq k $ dır.\label{14.2}
+    \item $ x \beta_* k $ ise $ x \leq k $ dır.\label{14.3}
+    \item $ x \beta_* k $ ve $ w $, $ x $'in $ L $ içinde bir zayıf tümleyeni ise $ k = x \vee ( k \wedge w ) $ 
+      ve $ k \wedge w \ll L $ olur.\label{14.4}
+  \end{enumerate}
+\end{teorem}
+\begin{ispat}
+  \begin{enumerate}
+    \item 
+      Kabul edelim ki $ x \leq b $ olsun. $ a \vee b = 1 $ olduğundan $ a \vee b \vee x = 1 $'dir. 
+      Hipotez gereği $ x \beta_* a $ olup buradan $ x \vee b = 1 $ bulunur. $ x \leq b $ olduğundan 
+      $ b = 1 $ elde edilir. Bu ise $ b $'nin $ 1 $'den farklı olmasıyla çelişir. O halde $ x \not\le b $ dir.
+    \item 
+      $ y \not\le k $ olsun. Bu durumda $ k \vee y = 1 $ bulunur. $ x \beta_* y $ olduğundan 
+      $ k = k \vee x = 1 $'dir. Bu ise çelişkidir. O halde $ y \leq k $ olur.
+    \item 
+      $ x \beta_* k $ ve $ x \not\le k $ olsun. $ k $ maksimal olduğundan $ x \vee k = 1 $ olur. 
+      $ x \beta_* k $ olduğundan ise $ k = k \vee k = 1 $ bulunur. Bu ise çelişkidir. O halde $ x \leq k $ olur.
+    \item
+      $ x \beta_* k $ ve $ w $, $ x $'in bir zayıf tümleyeni ise Teorem \ref{8} \ref{8.2} gereği 
+      w, $ k $'nın da bir zayıf tümleyeni olur. O halde $ k \vee w = 1 $ ve $ k \wedge w \ll L $ dir. 
+      $ x \beta_* k $ olduğundan \ref{14.3} gereği $ x \leq k $ dır. 
+      $ x \vee w = 1 $ ve $ x \leq k $ olduğundan modüler kuralı gereği $ k = k \wedge 1 = k \wedge ( x \vee w ) = x \vee ( k \wedge w) $ elde edilir. 
+  \end{enumerate}
+\end{ispat}
+
+
+%================= Teorem 15 ===================%
+
+
+\begin{teorem}
+  $ L $ bir kafes,  $ a,b \in L $ ve $ a \oplus b = 1 $ olsun. $ x,s \in a/0 $ için 
+  eğer $ L $ kafesinde $ x \beta_* s $ ise $ a/0 $ bülüm alt kafesinde de $ x \beta_* s $ olur.
+\end{teorem}
+\begin{ispat}
+  $ x \vee k = a $ olacak şekilde  $ k \in a/0 $ alalım. Bu durumda $ ( x \vee k ) \oplus b = 1 $ olur. O halde 
+  $ x \vee ( k \vee b ) = 1 $ bulunur. $ L $ içinde $ x \beta_* s $ olduğundan 
+  $ s \vee ( k \vee b ) = 1 $ dir. Bu durumda 
+  $$ \left[ (s \vee k ) \vee b \right] \wedge a = a \Rightarrow ( s \vee k ) \vee ( b \wedge a ) = a \Rightarrow s \vee k = a $$
+  elde edilir. Benzer işlemler $ x $ ve $ s $'nin rolleri değiştirilerek 
+  yapılırsa $ s \vee t = a $ olan her $ t \in a/0 $ için $ x \vee t = a $ olduğu gösterilebilir. 
+  O halde $ a / 0 $ bülüm alt kafesi içinde $ x \beta_* s $ dir.
+\end{ispat}
+
+
+%================ Teorem 16 ===================%
+
+
+\begin{teorem}\label{16}
+  $ L $ bir kafes olsun. $ x,y,k \in L $ için $ x \vee k = y \vee k = 1 $, $ k \wedge y \leq k \wedge x $ ve 
+  $ x \vee y \ll 1/y $ koşulları sağlanıyorsa $ x \vee y \ll 1/x $ dir.
+\end{teorem}
+\begin{ispat}
+  $  ( x \vee y ) \vee t = 1 $ olacak şekilde $ t \in 1/x $ alalım. $ x \vee k = 1 $ olduğundan 
+  $$ t \wedge ( x \vee k ) = t \wedge 1 \Rightarrow x \vee ( t \wedge k ) = t \Rightarrow x \vee y \vee ( t \wedge k ) = 1 \Rightarrow x \vee y \vee \left[ y \vee ( t \wedge k ) \right] = 1 $$ 
+  bulunur. $ x \vee y \ll 1/y $ olduğundan $ y \vee ( t \wedge k ) = 1 $ dir. Buradan 
+  $$ y \vee ( t \wedge k ) = 1 \Rightarrow k \wedge \left[ y \vee ( t \wedge k ) \right] = k \Rightarrow ( t \wedge k ) \vee ( k \wedge y ) = k \Rightarrow x \vee ( t \wedge k ) \vee ( k \wedge y )= 1 \Rightarrow t \vee ( k \wedge y ) = 1 $$ 
+  elde edilir. $ k \wedge y \leq k \wedge x $ olduğu dikkate alınırsa $ t = t \vee ( k \wedge x ) = 1 $ bulunur. 
+  O halde $ x \vee y \ll 1/x $ dir.
+\end{ispat}
+
+
+%================ Teorem 17 =====================%
+
+
+
+\begin{teorem}
+  $ L $ bir kafes ve $ x,y,a,b \in L $ için $ a,b \ll L $, $ x \leq y \vee b $ ve $ y \leq x \vee a $ olsun. 
+  Bu durumda $ x \beta_* y $ dir.
+\end{teorem}
+\begin{ispat}
+ $ x \vee y \vee k = 1 $ olacak şekilde $ k \in L $ alalım. $ x \leq y \vee b $ olduğundan $ y \vee b \vee k = 1 $ dir. 
+  $ b \ll L $ olduğu dikkate alınırsa $ y \vee k = 1 $ bulunur. 
+  Benzer şekilde $ y \leq x \vee a $ olduğundan $ x \vee a \vee k = 1 $ yazılabilir. 
+  $ a \ll L $ den $ x \vee k = 1 $ bulunur. Teorem \ref{3} \ref{3.1} gereği $ x \beta_* y $ olur.
+\end{ispat}
+
+
+%================ Teorem 18 ====================%
+
+
+
+\begin{teorem}\label{18}
+  $ L $ bir kafes ve $ x_1, x_2,y_1,y_2 \in L $ olsun. $ x_1 \beta_* x_2 $ ve $ y_1 \beta_* y_2 $ ise 
+  $ ( x_1 \vee x_2 ) \beta_* ( y_1 \vee y_2 ) $ dir.
+\end{teorem}
+\begin{ispat}
+  $ k \in L $ ve $ ( x_1 \vee x_2 ) \vee ( y_1 \vee y_2 ) \vee k = 1 $ olsun. 
+  $ x_1 \beta_* y_1 $ olduğundan $ y_1 \vee x_2 \vee y_2 \vee k =1 $ ve $ x_1 \vee x_2 \vee y_2 \vee k = 1 $ bulunur. 
+  $ x_2 \beta_* y_2 $ olduğundan ise $ y_1 \vee y_2 \vee k = 1 $ ve $ x_1 \vee x_2 \vee k = 1 $ elde edilir. 
+  Bu durumda Teorem \ref{3} \ref{3.1} gereği $ ( x_1 \vee x_2 ) \beta_* ( y_1 \vee y_2 ) $ olur.
+\end{ispat}
+
+
+
+%=============== Sonuç 19 ====================%
+
+
+
+\begin{sonuc} \label{19}
+  $ L $ bir kafes ve $ x,y_1,y_2,...,y_n \in L $ olsun. Her $ i=1,2,...,n $ için $ x \beta_* y_i $ ise 
+  $ \displaystyle x \beta_* \bigvee_{i=1}^n y_i $ olur.
+\end{sonuc}
+
+ 
+%============== Örnek 20 ======================%
+
+            
+ 
+%============== Teorem 21 ====================%
+\begin{teorem} \label{21}
+  $ L $ bir kafes, $ x,y \in L $ ve $ j \ll L $ olsun. 
+  Bu takdirde $ x \beta_* y $ olması için gerek ve yeter koşul $ x \beta_* ( y \vee j ) $ olmasıdır. 
+\end{teorem}
+\begin{ispat}
+  $ ( \Rightarrow ): $ 
+  $ k \in L $ ve $ x \vee k = 1 $ olsun. $ x \beta_* y $ olduğundan $ y \vee k = 1 $ dir. O halde 
+  $ y \vee j \vee k = 1 $ olur.
+  $ t \in L $ ve $ ( y \vee j ) \vee t = 1 $ olsun. $ j \ll L $ olduğundan $ y \vee t = 1 $ dir. 
+  $ x \beta_* y $ olduğu dikkate alınırsa $ x \vee t = 1 $ bulunur. O halde $ x \beta_* ( y \vee j ) $ dir. \\
+  $ ( \Leftarrow ): $ $ k \in L $ ve $ x \vee k = 1 $ olsun. $ x \beta_* ( y \vee j ) $ olduğundan 
+  $ y \vee j \vee k = 1 $ bulunur. $ j \ll L $ olduğu da dikkate alınırsa $ y \vee k = 1 $ olur. 
+  $ t \in L $ ve $ y \vee t = 1 $ olsun. Buradan $ y \vee j \vee t = 1 $ bulunur. $ x \beta_* ( y \vee j ) $ 
+  olduğundan $ x \vee t = 1 $ olur. O halde $ x \beta_* y $ dir.
+\end{ispat}
+ 
+%================== Teorem 22 ========================
+\begin{teorem}\label{22}
+  $ L $ bir kafes, $ Rad(L)=0 $ ve $ a \oplus b = 1 $ olsun. Bu takdirde bir $ x \in L $ için
+  $ x \beta_* a $ ise $ x \oplus b = 1 $ dir.
+\end{teorem}
+\begin{ispat}
+  $ a \oplus b = 1 $ olduğundan $ b $, $ a $'nın bir tümleyenidir. $ x \beta_* a $ denkliği ve
+  Teorem \ref{8} \ref{8.1} gereği $ b $, $ x $'in de bir tümleyenidir.
+  Bu durumda $ b \vee x = 1 $ ve $ b \wedge x \ll x/0 $ olur.
+  $ Rad(L) = 0 $ olduğundan Yardımcı Teorem \ref{radicin} gereği $ x \wedge b \leq Rad(L) =0 $ bulunur. 
+  Sonuç olarak $ x \oplus b $ = 1 dir.
+\end{ispat}
+
+
+%=============== Teorem 23 ============================
+\begin{teorem}\label{23}
+  $ L $ bir kafes olsun. $ L $'nin zayıf tümlenmiş olması için gerek ve yeter koşul 
+  $ L $'nin her elemanının $ \beta_* $ bağıntısına göre bir zayıf tümleyene denk olmasıdır.
+\end{teorem}
+\begin{ispat}
+  $( \Rightarrow ):$ \ $ x \in L $ olsun. $ L $ zayıf tümlenmiş olduğundan $ x \vee z = 1 $ ve 
+  $ x \wedge z \ll L $ olacak şekilde bir $ z \in L $ vardır. Burada $ x $, $ z $'nin bir zayıf 
+  tümleyeni olup zayıf tümleyen bir elemandır. $ \beta_* $ bağıntısının yansıma özelliğini 
+  gözönüne alırsak $ x \beta_* x $ olur. O halde $ L $'nin her elemanı, $ L $'nin bir 
+  zayıf tümleyen elemanına denktir. \\ 
+  $( \Leftarrow ): $ \  $ L $'nin her elemanı, $ L $ içinde bir zayıf tümleyene denk olsun. 
+  Bu takdirde bir $ x \in L $ için $ x \beta_* z $ olacak şekilde $ z \in L $ zayıf tümleyen 
+  elemanı vardır. O halde $ a \vee z = 1 $ ve $ a \wedge z \ll L $ koşullarını sağlayan 
+  bir $ a \in L $ bulunabilir. Burada $ a $ elemanı da $ z $'nin $ L $ içinde bir zayıf tümleyenidir. 
+  $ x \beta_* z $ olduğundan Teorem \ref{8} \ref{8.2} gereği $ a $, $ x $'in de bir zayıf tümleyenidir. 
+  Sonuç olarak $ L $ zayıf tümlenmiştir. 
+\end{ispat}
+
+
+
+%===================== Teorem 24 =======================%
+\begin{teorem}\label{24}
+  $ L $ nin zayıf tümlenmiş bir kafes olması için gerekli ve yeterli koşul her $ x \in L $ için 
+  $ x \vee h = z \vee h = x \vee z $ eşitliklerini sağlayan $ L $'nin bir $ h \ll L $ elemanının ve 
+  $ L $ içinde zayıf tümleyen olan bir $ z $ elemanının bulunabilmesidir. 
+\end{teorem}
+\begin{ispat}
+    $ ( \Rightarrow ): $ \  $ L $ zayıf tümlenmiş ve $ x \in L $ olsun. Teorem \ref{23} gereği $ x \beta_* z $ 
+    olacak şekilde $ L $ içinde bir $ z $ zayıf tümleyen elemanı vardır. Bu durumda bir $ w \in L $ için 
+    $ z \vee w = 1 $ ve $ z \wedge w \ll L $ olur. Sonuç \ref{19} gereği 
+    $ x \beta_* ( x \vee z ) $ ve $ z \beta_* ( x \vee z ) $ yazılabilir. Bu takdirde Teorem \ref{8} \ref{8.2} gereği 
+    $ w $, $ x $ ve $ x \vee z $ elemanlarının da bir zayıf tümleyenidir. Burada $ h = ( x \vee z ) \wedge w \ll L $ 
+    olarak seçilirse modüler kuralı yardımıyla 
+    $$ x \vee h = z \vee \left[ ( x \vee z ) \wedge w \right] = ( x \vee z ) \wedge ( x \vee w ) = ( x \vee z ) \wedge 1 = x \vee z $$
+    ve 
+    $$ z \vee h = z \vee \left[ ( x \vee z ) \wedge w \right] = ( x \vee z ) \wedge ( z \vee w ) = ( x \vee z ) \wedge 1 = x \vee z $$ 
+    elde edilir. O halde $ x \vee h = z \vee h =  x \vee z $ olur. \\
+    $ ( \Leftarrow ): $ \ $ t \in L $ ve $ x \vee t = 1 $ olsun. Hipotez gereği $ h \ll L $ ve $ z $, $ L $ içinde 
+    bir zayıf tümleyen olmak üzere $ x \vee h = z \vee h =  x \vee z $ eşitlikleri vardır. 
+    Bu durumda $ x \vee h \vee t = 1 $ olur ve $ z \vee h \vee t = 1 $ yazılabilir. $ h \ll L $ olduğundan $ z \vee t = 1 $ bulunur. 
+    Benzer şekilde $ z \vee k = 1 $ eşitliğini sağlayan her $ k \in L $ için $ x \vee k = 1 $ olduğu gösterilebilir. 
+    O halde $ x \beta_* z $ dir. Sonuç olarak Teorem \ref{23} gereği $ L $ zayıf tümlenmiştir. 
+
+\end{ispat}
+
+
+
+
+
+
+\cleardoublepage
+\addcontentsline{toc}{section}{KAYNAKÇA}
+\printbibliography[maxnames=99,title={KAYNAKÇA}]
+
+
+
+
+
+
+
+
+
+\end{document}
